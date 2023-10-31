@@ -1,12 +1,27 @@
+import { LoadingOverlay } from "@mantine/core";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "../pages/Home";
+
+const Home = React.lazy(() => import("../pages/Home"));
 
 const MainRoute = () => {
 	return (
 		<Routes>
 			<Route
 				path="/"
-				element={<Home />}
+				element={
+					<React.Suspense
+						fallback={
+							<LoadingOverlay
+								visible
+								overlayProps={{ radius: "sm", blur: 2 }}
+								loaderProps={{ type: "dots" }}
+							/>
+						}
+					>
+						<Home />
+					</React.Suspense>
+				}
 			/>
 		</Routes>
 	);
