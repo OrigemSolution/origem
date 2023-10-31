@@ -43,6 +43,7 @@ const Carousel = ({ images }) => {
 						direction={{ base: "column", sm: "row" }}
 						gap={{ base: "sm", sm: "lg" }}
 						justify={{ sm: "center" }}
+						mb={"30px"}
 					>
 						<Paper
 							w={{
@@ -51,6 +52,8 @@ const Carousel = ({ images }) => {
 							}}
 							bg={"#F7A73A"}
 							h={"280px"}
+							radius={"sm"}
+							p={"20px"}
 						>
 							<Text>TESTIMONIALS</Text>
 							<Title>Feedback from our clients</Title>
@@ -63,6 +66,7 @@ const Carousel = ({ images }) => {
 								sm: "68%",
 							}}
 							h={"280px"}
+							radius={"sm"}
 						>
 							{images.map((image, index) => {
 								return (
@@ -116,15 +120,21 @@ const Carousel = ({ images }) => {
 						<ActionIcon
 							variant="outline"
 							onClick={prevSlide}
+							mr={"xl"}
+							radius={"xl"}
+							size={"lg"}
+							color="#fff"
 						>
-							<ArrowLeft2 color="#fff" />
+							<ArrowLeft2 color="#fff" size={"20px"} />
 						</ActionIcon>
-						<ActionIcon>
-							<ArrowRight2
-								onClick={nextSlide}
-								style={{ cursor: "pointer" }}
-								color="#fff"
-							/>
+						<ActionIcon
+							variant="outline"
+							onClick={nextSlide}
+							radius={"xl"}
+							size={"lg"}
+							color="#fff"
+						>
+							<ArrowRight2 color="#fff" size={"20px"} />
 						</ActionIcon>
 					</Flex>
 				</Paper>
