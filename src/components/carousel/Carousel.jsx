@@ -31,6 +31,7 @@ const Carousel = ({ images }) => {
 		<Paper
 			bg={"#1A1A1A"}
 			w={"100%"}
+			radius={0}
 		>
 			<Container
 				p={"60px 0"}
