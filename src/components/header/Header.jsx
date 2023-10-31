@@ -1,5 +1,6 @@
 import { Button, Container, Flex, Image } from "@mantine/core";
 import Logo from "../../assets/Origem-02-cropped.png";
+import { ContactModal } from "../modal/ContactModal";
 
 const Header = () => {
 	return (
@@ -19,7 +20,7 @@ const Header = () => {
 						h={"35px"}
 					/>
 
-					<Button>Let&lsquo;s Talk</Button>
+					<ContactModal>Let&lsquo;s Talk</ContactModal>
 				</Flex>
 			</Container>
 		</div>

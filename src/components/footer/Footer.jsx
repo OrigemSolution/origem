@@ -26,7 +26,7 @@ const Footer = () => {
 						product?
 					</Title>
 
-					<ContactModal>Schedule a Free Consultation</ContactModal>
+					<ContactModal styled={true}>Schedule a Free Consultation</ContactModal>
 				</div>
 				<div className={classes.inner}>
 					<Image
