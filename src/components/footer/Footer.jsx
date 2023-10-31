@@ -11,6 +11,7 @@ import {
 import classes from "./Footer.module.css";
 import { Instagram, Twitch } from "iconsax-react";
 import Logo from "../../assets/Origem-02-cropped.png";
+import { ContactModal } from "../modal/ContactModal";
 
 const Footer = () => {
 	return (
@@ -25,21 +26,7 @@ const Footer = () => {
 						product?
 					</Title>
 
-					<div
-						style={{
-							display: "flex",
-							flexDirection: "column",
-							position: "relative",
-						}}
-					>
-						<div className={classes.modalButton}></div>
-						<Button
-							className={classes.button}
-							radius={"md"}
-						>
-							Schedule a Free Consultation
-						</Button>
-					</div>
+					<ContactModal>Schedule a Free Consultation</ContactModal>
 				</div>
 				<div className={classes.inner}>
 					<Image
