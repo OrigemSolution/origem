@@ -35,7 +35,7 @@ const Carousel = ({ images }) => {
 		>
 			<Container
 				p={"60px 0"}
-				size={"85%"}
+				size={"responsive"}
 			>
 				<Paper bg={"transparent"}>
 					<Flex

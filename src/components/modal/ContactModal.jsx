@@ -11,10 +11,11 @@ import {
 	NumberInput,
 } from "@mantine/core";
 import classes from "./Modal.module.css";
+import PropTypes from "prop-types";
 
 export const ContactModal = ({ children, styled }) => {
 	const [opened, { open, close }] = useDisclosure(false);
-    const matches = useMediaQuery('(max-width: 500px)');
+	const matches = useMediaQuery("(max-width: 500px)");
 
 	return (
 		<>
@@ -27,7 +28,7 @@ export const ContactModal = ({ children, styled }) => {
 					backgroundOpacity: 0.55,
 					blur: 3,
 				}}
-                fullScreen={matches}
+				fullScreen={matches}
 			>
 				<form>
 					<Fieldset
@@ -120,4 +121,9 @@ export const ContactModal = ({ children, styled }) => {
 			)}
 		</>
 	);
+};
+
+ContactModal.propTypes = {
+	children: PropTypes.string,
+	styled: PropTypes.bool,
 };

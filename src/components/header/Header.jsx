@@ -1,4 +1,4 @@
-import { Button, Container, Flex, Image } from "@mantine/core";
+import {  Container, Flex, Image } from "@mantine/core";
 import Logo from "../../assets/Origem-02-cropped.png";
 import { ContactModal } from "../modal/ContactModal";
 
@@ -7,7 +7,7 @@ const Header = () => {
 		<div style={{ backgroundColor: "#1A1A1A" }}>
 			<Container
 				p={0}
-				size={"85%"}
+				size={"responsive"}
 			>
 				<Flex
 					justify={"space-between"}

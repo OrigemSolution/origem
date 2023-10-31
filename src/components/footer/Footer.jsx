@@ -5,7 +5,6 @@ import {
 	Text,
 	Image,
 	Title,
-	Button,
 	Container,
 } from "@mantine/core";
 import classes from "./Footer.module.css";
@@ -15,7 +14,7 @@ import { ContactModal } from "../modal/ContactModal";
 
 const Footer = () => {
 	return (
-		<Container size={"85%"}>
+		<Container size={"responsive"}>
 			<div className={classes.footer}>
 				<div className={classes.upper}>
 					<Title

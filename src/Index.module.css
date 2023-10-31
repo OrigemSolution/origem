@@ -1,0 +1,7 @@
+.responsiveContainer {
+	max-width: 85% !important;
+
+	@media (max-width: $mantine-breakpoint-sm) {
+		max-width: 95% !important;
+	}
+}
