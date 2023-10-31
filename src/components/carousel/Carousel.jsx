@@ -68,6 +68,7 @@ const Carousel = ({ images }) => {
 							h={"280px"}
 							radius={"sm"}
 						>
+							<Paper bg={"transparent"	}>
 							{images.map((image, index) => {
 								return (
 									<div
@@ -109,6 +110,7 @@ const Carousel = ({ images }) => {
 									</div>
 								);
 							})}
+							</Paper>
 						</Paper>
 					</Flex>
 				</Paper>
