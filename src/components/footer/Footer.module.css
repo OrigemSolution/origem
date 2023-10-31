@@ -1,0 +1,66 @@
+.footer {
+	margin-top: rem(80px);
+}
+
+.inner {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: var(--mantine-spacing-xl) 0;
+	margin-top: 40px;
+
+	@media (max-width: $mantine-breakpoint-sm) {
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+	}
+}
+
+.links {
+	@media (max-width: $mantine-breakpoint-sm) {
+		margin-top: var(--mantine-spacing-lg);
+		margin-bottom: var(--mantine-spacing-sm);
+	}
+}
+
+.upper {
+	text-align: center;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding: 30px 10px;
+}
+
+.sub {
+	color: #f7a73a;
+}
+
+.modalButton {
+	border: 1px solid #f7a73a;
+	border-spacing: 4px;
+	border-collapse: separate;
+	border-radius: 8px;
+	width: 280px;
+	height:55px;
+	position: absolute;
+	margin-top: 22px;
+	margin-left: 18px;
+
+	@media (max-width: $mantine-breakpoint-sm) {
+		width: 250px;
+		border-radius: 0px !important;
+	}
+}
+
+.button {
+	width: 280px !important;
+	height: 55px !important;
+	margin-top: 11px;
+	margin-left: 8px;
+
+	@media (max-width: $mantine-breakpoint-sm) {
+		width: 250px !important;
+		border-radius: 0px !important;
+	}
+}
