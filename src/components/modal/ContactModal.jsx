@@ -1,4 +1,4 @@
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import {
 	Modal,
 	Button,
@@ -7,7 +7,6 @@ import {
 	SimpleGrid,
 	Stack,
 	Textarea,
-	Group,
 	Flex,
 	NumberInput,
 } from "@mantine/core";
@@ -15,6 +14,7 @@ import classes from "./Modal.module.css";
 
 export const ContactModal = ({ children, styled }) => {
 	const [opened, { open, close }] = useDisclosure(false);
+    const matches = useMediaQuery('(max-width: 500px)');
 
 	return (
 		<>
@@ -23,13 +23,23 @@ export const ContactModal = ({ children, styled }) => {
 				onClose={close}
 				title="Book a Session"
 				size={"500px"}
+				overlayProps={{
+					backgroundOpacity: 0.55,
+					blur: 3,
+				}}
+                fullScreen={matches}
 			>
 				<form>
 					<Fieldset
 						legend="You would receive an email with date and time options for the meeting"
 						variant="unstyled"
 					>
-						<SimpleGrid cols={2}>
+						<SimpleGrid
+							cols={{
+								base: 1,
+								sm: 2,
+							}}
+						>
 							<Stack>
 								<TextInput
 									label="Company Name"
@@ -38,6 +48,7 @@ export const ContactModal = ({ children, styled }) => {
 									withAsterisk
 									size="md"
 									classNames={{ label: classes.label }}
+									data-autofocus
 								/>
 								<TextInput
 									label="Industry"
