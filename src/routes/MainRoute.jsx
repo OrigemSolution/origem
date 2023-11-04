@@ -23,6 +23,22 @@ const MainRoute = () => {
 					</React.Suspense>
 				}
 			/>
+			<Route
+				path="*"
+				element={
+					<React.Suspense
+						fallback={
+							<LoadingOverlay
+								visible
+								overlayProps={{ radius: "sm", blur: 2 }}
+								loaderProps={{ type: "dots" }}
+							/>
+						}
+					>
+						<Home />
+					</React.Suspense>
+				}
+			/>
 		</Routes>
 	);
 };

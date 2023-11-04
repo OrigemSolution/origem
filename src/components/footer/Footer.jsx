@@ -8,9 +8,10 @@ import {
 	Container,
 } from "@mantine/core";
 import classes from "./Footer.module.css";
-import { Instagram, Twitch } from "iconsax-react";
+import { Instagram } from "iconsax-react";
 import Logo from "../../assets/Origem-02-cropped.png";
 import { ContactModal } from "../modal/ContactModal";
+import { IconBrandTwitter } from "@tabler/icons-react";
 
 const Footer = () => {
 	return (
@@ -57,7 +58,7 @@ const Footer = () => {
 							radius="xl"
 							style={{ border: "none" }}
 						>
-							<Twitch
+							<IconBrandTwitter
 								style={{ width: rem(18), height: rem(18) }}
 								stroke={1.5}
 							/>

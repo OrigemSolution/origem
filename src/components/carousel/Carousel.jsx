@@ -32,6 +32,7 @@ const Carousel = ({ images }) => {
 			bg={"#1A1A1A"}
 			w={"100%"}
 			radius={0}
+			p={"70px 0"}
 		>
 			<Container
 				p={"60px 0"}
@@ -54,62 +55,87 @@ const Carousel = ({ images }) => {
 							h={"280px"}
 							radius={"sm"}
 							p={"20px"}
+							c="white"
 						>
-							<Text>TESTIMONIALS</Text>
-							<Title>Feedback from our clients</Title>
+							<Flex
+								direction={"column"}
+								align={"start"}
+								justify={"end"}
+								h={"100%"}
+							>
+								<Text>TESTIMONIALS</Text>
+								<Title>Feedback from our clients</Title>
+							</Flex>
 						</Paper>
 						<Paper
 							bg={"#2C4B56"}
-							style={{ padding: "20px", color: "white" }}
+							style={{ padding: "36px", color: "white" }}
 							w={{
 								base: "100%",
 								sm: "68%",
 							}}
-							h={"280px"}
+							m={"auto"}
 							radius={"sm"}
 						>
-							<Paper bg={"transparent"	}>
-							{images.map((image, index) => {
-								return (
-									<div
-										className={`slide ${index === current ? "active" : ""}`}
-										key={index}
-									>
-										{index === current && (
-											<>
-												<Paper bg={"transparent"}>
-													<Text>{image.text}</Text>
-
-													<Flex
-														justify="start"
-														align="center"
-													>
-														<Image
-															src={image.src}
-															alt="avatar"
-															w={50}
-															h={50}
-															radius={"xl"}
-														/>
-														<Paper
-															ml={"lg"}
-															bg={"transparent"}
-														>
-															<Title
-																order={3}
-																mb={"-5px"}
+							<Paper
+								bg={"transparent"}
+								h={"100%"}
+							>
+								<Flex
+									gap={"lg"}
+									justify={"center"}
+									align={"center"}
+									direction={"column"}
+									h={"100%"}
+								>
+									{images.map((image, index) => {
+										return (
+											<div
+												className={`slide ${index === current ? "active" : ""}`}
+												key={index}
+											>
+												{index === current && (
+													<>
+															<Flex
+																direction={"column"}
+																align={"start"}
+																justify={"start"}
+																h={"100%"}
 															>
-																{image.name}
-															</Title>
-															<Text>{image.role}</Text>
-														</Paper>
-													</Flex>
-												</Paper>
-											</>
-										)}
-									</div>
-								);
-							})}
+																<Text>{image.text}</Text>
+
+																<Flex
+																	justify="start"
+																	align="center"
+																	mt={"lg"}
+																>
+																	<Image
+																		src={image.src}
+																		alt="avatar"
+																		w={50}
+																		h={50}
+																		radius={"xl"}
+																	/>
+																	<Paper
+																		ml={"lg"}
+																		bg={"transparent"}
+																	>
+																		<Title
+																			order={3}
+																			mb={"-5px"}
+																		>
+																			{image.name}
+																		</Title>
+																		<Text>{image.role}</Text>
+																	</Paper>
+																</Flex>
+															</Flex>
+													</>
+												)}
+											</div>
+										);
+									})}
+								</Flex>
 							</Paper>
 						</Paper>
 					</Flex>
@@ -127,7 +153,10 @@ const Carousel = ({ images }) => {
 							size={"lg"}
 							color="#fff"
 						>
-							<ArrowLeft2 color="#fff" size={"20px"} />
+							<ArrowLeft2
+								color="#fff"
+								size={"20px"}
+							/>
 						</ActionIcon>
 						<ActionIcon
 							variant="outline"
@@ -136,7 +165,10 @@ const Carousel = ({ images }) => {
 							size={"lg"}
 							color="#fff"
 						>
-							<ArrowRight2 color="#fff" size={"20px"} />
+							<ArrowRight2
+								color="#fff"
+								size={"20px"}
+							/>
 						</ActionIcon>
 					</Flex>
 				</Paper>

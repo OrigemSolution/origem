@@ -1,5 +1,6 @@
 .responsiveContainer {
-	max-width: 85% !important;
+	max-width: 1068px !important;
+	padding: 0 20px !important;
 
 	@media (max-width: $mantine-breakpoint-sm) {
 		max-width: 95% !important;

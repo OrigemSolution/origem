@@ -1,5 +1,6 @@
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
+import SectionFive from "../components/sections/sectionFive/SectionFive";
 import SectionFour from "../components/sections/sectionFour/SectionFour";
 import SectionOne from "../components/sections/sectionOne/SectionOne";
 import SectionThree from "../components/sections/sectionThree/SectionThree";
@@ -11,8 +12,9 @@ const Home = () => {
 		<SectionOne />
 		<SectionTwo />
 		<SectionThree />
+		<SectionFive />
 		<SectionFour />
-		<Footer />
+		<Footer /> 
 	</div>;
 };
 

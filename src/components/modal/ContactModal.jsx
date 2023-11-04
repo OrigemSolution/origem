@@ -13,7 +13,7 @@ import {
 import classes from "./Modal.module.css";
 import PropTypes from "prop-types";
 
-export const ContactModal = ({ children, styled }) => {
+export const ContactModal = ({ children, styled, width, mobile }) => {
 	const [opened, { open, close }] = useDisclosure(false);
 	const matches = useMediaQuery("(max-width: 500px)");
 
@@ -23,7 +23,7 @@ export const ContactModal = ({ children, styled }) => {
 				opened={opened}
 				onClose={close}
 				title="Book a Session"
-				size={"500px"}
+				size={"550px"}
 				overlayProps={{
 					backgroundOpacity: 0.55,
 					blur: 3,
@@ -99,7 +99,7 @@ export const ContactModal = ({ children, styled }) => {
 				</form>
 			</Modal>
 
-			{styled ? (
+			{styled && !mobile && (
 				<div
 					style={{
 						display: "flex",
@@ -107,17 +107,37 @@ export const ContactModal = ({ children, styled }) => {
 						position: "relative",
 					}}
 				>
-					<div className={classes.modalButton}></div>
+					<div
+						className={classes.modalButton}
+						style={{ width: width || 280 }}
+					></div>
 					<Button
 						className={classes.button}
 						radius={"md"}
 						onClick={open}
+						w={width || 280}
 					>
 						{children}
 					</Button>
 				</div>
-			) : (
-				<Button onClick={open}>{children}</Button>
+			)}
+			{!styled && !mobile && <Button onClick={open}>{children}</Button>}
+
+			{mobile && (
+				<div className={classes.MainDiv}>
+					<div
+						className={classes.MainModalButton}
+						style={{ width: width || 280 }}
+					></div>
+					<Button
+						className={classes.MainButton}
+						radius={"md"}
+						onClick={open}
+						w={width || 280}
+					>
+						{children}
+					</Button>
+				</div>
 			)}
 		</>
 	);
@@ -126,4 +146,6 @@ export const ContactModal = ({ children, styled }) => {
 ContactModal.propTypes = {
 	children: PropTypes.string,
 	styled: PropTypes.bool,
+	width: PropTypes.number,
+	mobile: PropTypes.bool,
 };
