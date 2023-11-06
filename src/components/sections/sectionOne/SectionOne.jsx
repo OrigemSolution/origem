@@ -19,7 +19,7 @@ const SectionOne = () => {
 					gap={20}
 				>
 					<div className={classes.title}>
-						<Title c={"white"} className="headers">
+						<Title c={"white"} className="headers" fw={600}>
 							Grow your business with {" "}	
 							<span style={{color: "#f7a73a"}}>Technology Solutions</span>
 						</Title>
