@@ -146,8 +146,9 @@ export default function SectionFive() {
 				</Text>
 			</Container>
 			<Container
-				size={540}
+				size={500}
 				p={0}
+				className="headers"
 			>
 				<Title
 					className={classes.title}
@@ -168,7 +169,7 @@ export default function SectionFive() {
 				{features}
 			</SimpleGrid>
 
-			<Paper mt={80} w={"100%"} radius={0}>
+			<Paper mt={80} w={"100%"} radius={0} className="headers">
 				<Title
 					size="24px"
 					className={classes.title}

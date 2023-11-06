@@ -21,6 +21,7 @@ const Footer = () => {
 					<Title
 						maw={559}
 						mb={30}
+						className="headers"
 					>
 						Ready to <span className={classes.sub}>revolutionize</span> your
 						product?

@@ -36,6 +36,7 @@ export function Feature({ title, color, description }) {
 				mb={7}
 				fw={700}
 				c={"white"}
+				className="headers"
 			>
 				{title}
 			</Text>
@@ -78,6 +79,7 @@ export default function SectionThree() {
 			<Container
 				size={590}
 				p={0}
+				className="headers"
 			>
 				<Title className={classes.title}>
 					One Platform,{" "}

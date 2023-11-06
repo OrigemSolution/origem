@@ -50,6 +50,7 @@ export function Feature({ icon: Icon, title, description }) {
 				mt="sm"
 				mb={7}
                 fw={700}
+				className="headers"
 			>
 				{title}
 			</Text>
@@ -88,6 +89,7 @@ export function FeaturesGrid() {
 			<Container
 				size={560}
 				p={0}
+				className="headers"
 			>
 				<Title className={classes.title}>
 					We bring the <span style={{ color: "#f7a73a" }}>perfect </span>

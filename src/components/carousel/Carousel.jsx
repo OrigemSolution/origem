@@ -64,7 +64,7 @@ const Carousel = ({ images }) => {
 								h={"100%"}
 							>
 								<Text>TESTIMONIALS</Text>
-								<Title>Feedback from our clients</Title>
+								<Title className="headers">Feedback from our clients</Title>
 							</Flex>
 						</Paper>
 						<Paper
