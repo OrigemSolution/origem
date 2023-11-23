@@ -4,6 +4,7 @@ deployment:
     - export DEPLOYPATH=/home2/origemso/public_html/
     - /bin/cp index.html $DEPLOYPATH
     - /bin/cp package-lock.json $DEPLOYPATH
+    - /bin/cp .eslintrc.cjs $DEPLOYPATH
     - /bin/cp package.json $DEPLOYPATH
     - /bin/cp postcss.config.cjs $DEPLOYPATH
     - /bin/cp README.md $DEPLOYPATH
