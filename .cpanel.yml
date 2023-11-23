@@ -1,6 +1,14 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=//home2/origemso/public_html/
+    - export DEPLOYPATH=/home2/origemso/public_html/
     - /bin/cp index.html $DEPLOYPATH
-    - /bin/cp style.css $DEPLOYPATH
+    - /bin/cp package-lock.json $DEPLOYPATH
+    - /bin/cp package.json $DEPLOYPATH
+    - /bin/cp postcss.config.cjs $DEPLOYPATH
+    - /bin/cp README.md $DEPLOYPATH
+    - /bin/cp vite.config.js $DEPLOYPATH
+    - /bin/cp -R fonts $DEPLOYPATH
+    - /bin/cp -R public $DEPLOYPATH
+    - /bin/cp -R src $DEPLOYPATH
+    
