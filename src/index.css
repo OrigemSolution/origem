@@ -10,3 +10,11 @@ body {
 .headers, .headers h1, .headers span {
   font-family: 'Recoleta', Times, serif !important;
 }
+
+.custom-number-input .m-77c9d27d:hover:not([data-loading]):not(:disabled):not([data-disabled]) {
+  --_button-bg: transparent !important;
+}
+
+.feature-list ::-webkit-scrollbar {
+  width: 1px;
+}
