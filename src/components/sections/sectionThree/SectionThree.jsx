@@ -100,7 +100,9 @@ export default function SectionThree() {
 				</Text>
 			</Container>
 
-			<HeroBullets content={features} />
+			<div className="feature-list">
+				<HeroBullets content={features} />
+			</div>
 		</Container>
 	);
 }
