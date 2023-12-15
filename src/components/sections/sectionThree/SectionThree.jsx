@@ -4,22 +4,22 @@ import HeroBullets from "./HeroSection";
 
 export const DATA = [
 	{
-		title: "Product Design and development",
+		title: "Digital Marketing",
 		color: "#f7a73a",
 		description:
-			"We Transform conceptual designs into successful products with strategic development, technical engineering and aesthetic performance ",
+			"Social media, SEO, email, & content campaigns to boost brand awareness, engage customers, & generate leads",
 	},
 	{
-		title: "Technology advisory",
+		title: "Product Design and Development",
 		color: "#804EF7",
 		description:
-			"We Transform conceptual designs into successful products with strategic development, technical engineering and aesthetic performance ",
+			"Design, develop, & optimize user-friendly products with strategic data insights & compelling copywriting",
 	},
 	{
-		title: "Data Analytics",
+		title: "Business Strategy and Management",
 		color: "#26474E",
 		description:
-			"We rethink and redesign your processes to achieve significant improvement in performance, productivity, effectiveness and efficiency. ",
+			"Navigate market complexities, optimize operations, and achieve sustainable growth with expert guidance and tailored solutions",
 	},
 ];
 
