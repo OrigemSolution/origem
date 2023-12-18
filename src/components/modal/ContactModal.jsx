@@ -1,4 +1,4 @@
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useDisclosure, useMediaQuery, useToggle } from "@mantine/hooks";
 import {
 	Modal,
 	Button,
@@ -15,6 +15,8 @@ import {
 	Input,
 	Image,
 	ScrollArea,
+	Title,
+	Space,
 } from "@mantine/core";
 import classes from "./Modal.module.css";
 import industriesData from "./industries.json";
@@ -26,9 +28,11 @@ import { useRef, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "mantine-form-zod-resolver";
 import emailjs from "@emailjs/browser";
+import { IconCircleCheckFilled } from "@tabler/icons-react";
 
 export const ContactModal = ({ children, styled, width, mobile }) => {
 	const [opened, { open, close }] = useDisclosure(false);
+	const [state, toggle] = useToggle(["new", "sent"]);
 	const matches = useMediaQuery("(max-width: 500px)");
 
 	const industryNames = industriesData.map((industry) => industry.name);
@@ -51,6 +55,11 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 
 	const formN = useRef();
 
+	const handleClose = () => {
+		close();
+		form.reset();
+	};
+
 	const handleSend = async () => {
 		setLoading(true);
 		emailjs
@@ -64,6 +73,11 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 				(result) => {
 					console.log(result);
 					setLoading(false);
+					toggle("sent");
+					setTimeout(() => {
+						handleClose();
+						toggle("new");
+					}, 5000);
 				},
 				(error) => {
 					console.log(error.text);
@@ -125,11 +139,6 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 		},
 	});
 
-	const handleClose = () => {
-		close();
-		form.reset();
-	};
-
 	return (
 		<>
 			<Modal
@@ -143,198 +152,219 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 				}}
 				fullScreen={matches}
 			>
-				<form
-					ref={formN}
-					onSubmit={form.onSubmit((values) => handleSend(values))}
-				>
-					<Fieldset
-						legend="You would receive an email with date and time options for the meeting"
-						variant="unstyled"
+				{state === "new" && (
+					<form
+						ref={formN}
+						onSubmit={form.onSubmit((values) => handleSend(values))}
 					>
-						<SimpleGrid
-							cols={{
-								base: 1,
-								sm: 2,
-							}}
+						<Fieldset
+							legend="You would receive an email with date and time options for the meeting"
+							variant="unstyled"
 						>
-							<Stack>
-								<TextInput
-									label="Name"
-									variant="filled"
-									placeholder=""
-									withAsterisk
-									size="md"
-									classNames={{ label: classes.label }}
-									data-autofocus
-									name="name"
-									{...form.getInputProps("name")}
-								/>
-								<TextInput
-									label="Company Name"
-									variant="filled"
-									placeholder=""
-									size="md"
-									classNames={{ label: classes.label }}
-									name="company"
-									{...form.getInputProps("company")}
-								/>
-								<Select
-									variant="filled"
-									label="Industry"
-									placeholder="Search for industry..."
-									data={industryNames}
-									searchable
-									clearable
-									limit={30}
-									nothingFoundMessage="Nothing found..."
-									name="industry"
-									{...form.getInputProps("industry")}
-								/>
-							</Stack>
-							<Stack>
-								<TextInput
-									label="Email"
-									variant="filled"
-									placeholder=""
-									withAsterisk
-									size="md"
-									classNames={{ label: classes.label }}
-									name="email"
-									{...form.getInputProps("email")}
-								/>
-
-								<TextInput
-									label="Email"
-									variant="filled"
-									placeholder=""
-									withAsterisk
-									size="md"
-									hiddenFrom="xxxl"
-									classNames={{ label: classes.label }}
-									name="country"
-									value={value}
-								/>
-
-								<NumberInput
-									label="Phone number"
-									variant="filled"
-									placeholder=""
-									min={0}
-									size="md"
-									className="custom-number-input"
-									name="phone"
-									leftSection={
-										<Combobox
-											store={combobox}
-											withinPortal={false}
-											onOptionSubmit={(val) => {
-												setValue(val);
-												form.setValues({
-													...form.values,
-													country: val,
-												});
-												combobox.closeDropdown();
-											}}
-											width={"120px"}
-										>
-											<Combobox.Target>
-												<Button
-													variant="subtle"
-													w={"fit-content"}
-													color="black"
-													name="country"
-													onClick={() => combobox.toggleDropdown()}
-													size="xs"
-												>
-													{value || (
-														<Input.Placeholder>Select</Input.Placeholder>
-													)}
-												</Button>
-											</Combobox.Target>
-
-											<Combobox.Dropdown>
-												<Combobox.Options w={"100px"}>
-													<ScrollArea.Autosize
-														type="scroll"
-														mah={200}
-													>
-														{options}
-													</ScrollArea.Autosize>
-												</Combobox.Options>
-											</Combobox.Dropdown>
-										</Combobox>
-									}
-									clampBehavior="none"
-									classNames={{ label: classes.label }}
-									{...form.getInputProps("phone")}
-									hideControls
-								/>
-								<Select
-									variant="filled"
-									label="Select Service"
-									placeholder="Search for service..."
-									data={servicesData}
-									searchable
-									clearable
-									limit={30}
-									name="service"
-									nothingFoundMessage="Nothing found..."
-									{...form.getInputProps("service")}
-								/>
-							</Stack>
-						</SimpleGrid>
-						<Stack mt={"lg"}>
-							{form.values.industry === "Other Industry" && (
-								<TextInput
-									label="Other Industry"
-									variant="filled"
-									placeholder=""
-									withAsterisk
-									required
-									size="md"
-									name="otherIndustry"
-									classNames={{ label: classes.label }}
-									{...form.getInputProps("otherIndustry")}
-								/>
-							)}
-							{form.values.service === "Other Services" && (
-								<TextInput
-									label="Other Services"
-									variant="filled"
-									placeholder=""
-									withAsterisk
-									required
-									size="md"
-									name="otherService"
-									classNames={{ label: classes.label }}
-									{...form.getInputProps("otherService")}
-								/>
-							)}
-							<Textarea
-								label="Anything else we should know?"
-								variant="filled"
-								placeholder=""
-								withAsterisk
-								size="md"
-								name="message"
-								classNames={{ label: classes.label }}
-								{...form.getInputProps("message")}
-							/>
-						</Stack>
-						<Flex
-							mt={"xl"}
-							align="center"
-							justify={"center"}
-						>
-							<Button
-								type="submit"
-								loading={loading}
+							<SimpleGrid
+								cols={{
+									base: 1,
+									sm: 2,
+								}}
 							>
-								Book Meeting
-							</Button>
+								<Stack>
+									<TextInput
+										label="Name"
+										variant="filled"
+										placeholder=""
+										withAsterisk
+										size="md"
+										classNames={{ label: classes.label }}
+										data-autofocus
+										name="name"
+										{...form.getInputProps("name")}
+									/>
+									<TextInput
+										label="Company Name"
+										variant="filled"
+										placeholder=""
+										size="md"
+										classNames={{ label: classes.label }}
+										name="company"
+										{...form.getInputProps("company")}
+									/>
+									<Select
+										variant="filled"
+										label="Industry"
+										placeholder="Search for industry..."
+										data={industryNames}
+										searchable
+										clearable
+										limit={30}
+										nothingFoundMessage="Nothing found..."
+										name="industry"
+										{...form.getInputProps("industry")}
+									/>
+								</Stack>
+								<Stack>
+									<TextInput
+										label="Email"
+										variant="filled"
+										placeholder=""
+										withAsterisk
+										size="md"
+										classNames={{ label: classes.label }}
+										name="email"
+										{...form.getInputProps("email")}
+									/>
+
+									<TextInput
+										label="Email"
+										variant="filled"
+										placeholder=""
+										withAsterisk
+										size="md"
+										hiddenFrom="xxxl"
+										classNames={{ label: classes.label }}
+										name="country"
+										value={value}
+									/>
+
+									<NumberInput
+										label="Phone number"
+										variant="filled"
+										placeholder=""
+										min={0}
+										size="md"
+										className="custom-number-input"
+										name="phone"
+										leftSection={
+											<Combobox
+												store={combobox}
+												withinPortal={false}
+												onOptionSubmit={(val) => {
+													setValue(val);
+													form.setValues({
+														...form.values,
+														country: val,
+													});
+													combobox.closeDropdown();
+												}}
+												width={"120px"}
+											>
+												<Combobox.Target>
+													<Button
+														variant="subtle"
+														w={"fit-content"}
+														color="black"
+														name="country"
+														onClick={() => combobox.toggleDropdown()}
+														size="xs"
+													>
+														{value || (
+															<Input.Placeholder>Select</Input.Placeholder>
+														)}
+													</Button>
+												</Combobox.Target>
+
+												<Combobox.Dropdown>
+													<Combobox.Options w={"100px"}>
+														<ScrollArea.Autosize
+															type="scroll"
+															mah={200}
+														>
+															{options}
+														</ScrollArea.Autosize>
+													</Combobox.Options>
+												</Combobox.Dropdown>
+											</Combobox>
+										}
+										clampBehavior="none"
+										classNames={{ label: classes.label }}
+										{...form.getInputProps("phone")}
+										hideControls
+									/>
+									<Select
+										variant="filled"
+										label="Select Service"
+										placeholder="Search for service..."
+										data={servicesData}
+										searchable
+										clearable
+										limit={30}
+										name="service"
+										nothingFoundMessage="Nothing found..."
+										{...form.getInputProps("service")}
+									/>
+								</Stack>
+							</SimpleGrid>
+							<Stack mt={"lg"}>
+								{form.values.industry === "Other Industry" && (
+									<TextInput
+										label="Other Industry"
+										variant="filled"
+										placeholder=""
+										withAsterisk
+										required
+										size="md"
+										name="otherIndustry"
+										classNames={{ label: classes.label }}
+										{...form.getInputProps("otherIndustry")}
+									/>
+								)}
+								{form.values.service === "Other Services" && (
+									<TextInput
+										label="Other Services"
+										variant="filled"
+										placeholder=""
+										withAsterisk
+										required
+										size="md"
+										name="otherService"
+										classNames={{ label: classes.label }}
+										{...form.getInputProps("otherService")}
+									/>
+								)}
+								<Textarea
+									label="Anything else we should know?"
+									variant="filled"
+									placeholder=""
+									withAsterisk
+									size="md"
+									name="message"
+									classNames={{ label: classes.label }}
+									{...form.getInputProps("message")}
+								/>
+							</Stack>
+							<Flex
+								mt={"xl"}
+								align="center"
+								justify={"center"}
+							>
+								<Button
+									type="submit"
+									loading={loading}
+								>
+									Book Meeting
+								</Button>
+							</Flex>
+						</Fieldset>
+					</form>
+				)}
+				{state === "sent" && (
+					<>
+						<Flex
+							justify={"center"}
+							align={"center"}
+							mt={"xl"}
+							direction={"column"}
+						>
+							<IconCircleCheckFilled color="green" size={32} />
+							<Title
+								order={3}
+								mt={"md"}
+							>
+								Thank you for your interest.
+							</Title>
+							<Space h="40px" />
 						</Flex>
-					</Fieldset>
-				</form>
+					</>
+				)}
 			</Modal>
 
 			{styled && !mobile && (
