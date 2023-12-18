@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import cx from "clsx";
 import { BrowserRouter } from "react-router-dom";
-import { Container, MantineProvider, createTheme } from "@mantine/core";
+import { Container, MantineProvider, TextInput, createTheme } from "@mantine/core";
 import "./index.css";
 import "@mantine/core/styles.css";
 import classes from "./Index.module.css";
@@ -31,6 +31,17 @@ const theme = createTheme({
 			classNames: (_, { size }) => ({
 				root: cx({ [classes.responsiveContainer]: size === "responsive" }),
 			}),
+		}),
+		TextInput: TextInput.extend({
+			vars: (theme, props) => {
+				if (props.hiddenFrom === "xxxl") {
+					return {
+						root: {
+							"display":"none",
+						},
+					};
+				}
+			},
 		}),
 	},
 });

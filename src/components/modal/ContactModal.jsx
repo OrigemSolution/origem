@@ -22,10 +22,10 @@ import servicesData from "./services.json";
 import countriesData from "./countryList.json";
 import PropTypes from "prop-types";
 import { useForm } from "@mantine/form";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "mantine-form-zod-resolver";
-import { MailtrapClient } from "mailtrap";
+import emailjs from "@emailjs/browser";
 
 export const ContactModal = ({ children, styled, width, mobile }) => {
 	const [opened, { open, close }] = useDisclosure(false);
@@ -47,43 +47,28 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 	});
 
 	const [value, setValue] = useState("+234");
+	const [loading, setLoading] = useState(false);
 
-	const TOKEN = import.meta.env.VITE_TOKEN;
+	const formN = useRef();
 
-	const sender = {
-		email: "mailtrap@origemsolutions.com",
-		name: "Mailtrap Test",
-	};
-	const recipients = [
-		{
-			email: "origemsolutions@gmail.com",
-		},
-	];
-
-	const handleSend = async (values) => {
-		const client = new MailtrapClient({ token: TOKEN });
-
-		client
-			.send({
-				from: sender,
-				to: recipients,
-				subject: "Digital request from " + values.name + " - Origem Solutions",
-				text: `
-			Name: ${values.name} <br/>
-			Company: ${values.company} <br/>
-			Email: ${values.email} <br/>
-			Country: ${values.country} <br/>
-			Phone: ${values.phone} <br/>
-			Industry: ${values.industry} <br/>
-			OtherIndustry: ${values.otherIndustry} <br/>
-			Services: ${values.services} <br/>
-			OtherServices: ${values.otherServices} <br/>
-			Message: ${values.message}
-			
-			`,
-			})
-			.then(console.log)
-			.catch(console.error);
+	const handleSend = async () => {
+		setLoading(true);
+		emailjs
+			.sendForm(
+				import.meta.env.VITE_EMAIL_SERVICE_KEY,
+				import.meta.env.VITE_EMAIL_TEMPLATE_KEY,
+				formN.current,
+				import.meta.env.VITE_EMAIL_API_KEY
+			)
+			.then(
+				(result) => {
+					console.log(result);
+					setLoading(false);
+				},
+				(error) => {
+					console.log(error.text);
+				}
+			);
 	};
 
 	const options = countries.map((item) => (
@@ -158,7 +143,10 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 				}}
 				fullScreen={matches}
 			>
-				<form onSubmit={form.onSubmit((values) => handleSend(values))}>
+				<form
+					ref={formN}
+					onSubmit={form.onSubmit((values) => handleSend(values))}
+				>
 					<Fieldset
 						legend="You would receive an email with date and time options for the meeting"
 						variant="unstyled"
@@ -178,6 +166,7 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 									size="md"
 									classNames={{ label: classes.label }}
 									data-autofocus
+									name="name"
 									{...form.getInputProps("name")}
 								/>
 								<TextInput
@@ -186,6 +175,7 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 									placeholder=""
 									size="md"
 									classNames={{ label: classes.label }}
+									name="company"
 									{...form.getInputProps("company")}
 								/>
 								<Select
@@ -197,6 +187,7 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 									clearable
 									limit={30}
 									nothingFoundMessage="Nothing found..."
+									name="industry"
 									{...form.getInputProps("industry")}
 								/>
 							</Stack>
@@ -208,7 +199,20 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 									withAsterisk
 									size="md"
 									classNames={{ label: classes.label }}
+									name="email"
 									{...form.getInputProps("email")}
+								/>
+
+								<TextInput
+									label="Email"
+									variant="filled"
+									placeholder=""
+									withAsterisk
+									size="md"
+									hiddenFrom="xxxl"
+									classNames={{ label: classes.label }}
+									name="country"
+									value={value}
 								/>
 
 								<NumberInput
@@ -218,6 +222,7 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 									min={0}
 									size="md"
 									className="custom-number-input"
+									name="phone"
 									leftSection={
 										<Combobox
 											store={combobox}
@@ -237,6 +242,7 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 													variant="subtle"
 													w={"fit-content"}
 													color="black"
+													name="country"
 													onClick={() => combobox.toggleDropdown()}
 													size="xs"
 												>
@@ -271,6 +277,7 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 									searchable
 									clearable
 									limit={30}
+									name="service"
 									nothingFoundMessage="Nothing found..."
 									{...form.getInputProps("service")}
 								/>
@@ -285,6 +292,7 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 									withAsterisk
 									required
 									size="md"
+									name="otherIndustry"
 									classNames={{ label: classes.label }}
 									{...form.getInputProps("otherIndustry")}
 								/>
@@ -297,6 +305,7 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 									withAsterisk
 									required
 									size="md"
+									name="otherService"
 									classNames={{ label: classes.label }}
 									{...form.getInputProps("otherService")}
 								/>
@@ -307,6 +316,7 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 								placeholder=""
 								withAsterisk
 								size="md"
+								name="message"
 								classNames={{ label: classes.label }}
 								{...form.getInputProps("message")}
 							/>
@@ -316,7 +326,12 @@ export const ContactModal = ({ children, styled, width, mobile }) => {
 							align="center"
 							justify={"center"}
 						>
-							<Button type="submit">Book Meeting</Button>
+							<Button
+								type="submit"
+								loading={loading}
+							>
+								Book Meeting
+							</Button>
 						</Flex>
 					</Fieldset>
 				</form>
