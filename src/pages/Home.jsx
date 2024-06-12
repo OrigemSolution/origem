@@ -8,15 +8,6 @@ import SectionTwo from "../components/sections/sectionTwo/SectionTwo";
 
 const Home = () => {
 	return <div>
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-36LJCP6E0B">
-		</script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments)}
-			gtag('js', new Date());
-
-			gtag('config', 'G-36LJCP6E0B');
-		</script>
 		<Header />
 		<SectionOne />
 		<SectionTwo />
