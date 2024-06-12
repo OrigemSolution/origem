@@ -12,7 +12,7 @@ const Home = () => {
 		</script>
 		<script>
 			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
+			function gtag(){dataLayer.push(arguments)}
 			gtag('js', new Date());
 
 			gtag('config', 'G-36LJCP6E0B');
