@@ -8,7 +8,6 @@ import SectionTwo from "../components/sections/sectionTwo/SectionTwo";
 
 const Home = () => {
 	return <div>
-		<!-- Google tag (gtag.js) -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-36LJCP6E0B">
 		</script>
 		<script>
