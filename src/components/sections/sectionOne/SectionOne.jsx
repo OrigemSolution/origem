@@ -21,7 +21,7 @@ const SectionOne = () => {
 					<div className={classes.title}>
 						<Title c={"white"} className="headers" fw={600}>
 							Grow your business with {" "}	
-							<span style={{color: "#f7a73a"}}>Technology Solutions</span>
+							<span style={{color: "#f7a73a"}}>Social Media, Advertisement and Other Solutions</span>
 						</Title>
 					</div>
 					<Center
@@ -31,8 +31,8 @@ const SectionOne = () => {
 						<Text
 							c={"white"}
 						>
-							Providing the right technology solutions that help businesses
-							achieve their goals is what we do at OriGem.
+							Our innovative strategies and expert solutions ensure your brand stands out and thrives online.
+							Let us help you reach your audience, increase engagement, and drive success effortlessly.
 						</Text>
 					</Center>
 					<ContactModal
