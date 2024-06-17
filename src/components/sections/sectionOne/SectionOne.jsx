@@ -21,7 +21,7 @@ const SectionOne = () => {
 					<div className={classes.title}>
 						<Title c={"white"} className="headers" fw={600}>
 							Grow your business with {" "}	
-							<span style={{color: "#f7a73a"}}>Social Media, Advertisement and Other Solutions</span>
+							<span style={{color: "#f7a73a"}}>Social Media, Advertisement, and Other Solutions</span>
 						</Title>
 					</div>
 					<Center
